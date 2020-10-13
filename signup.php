@@ -35,7 +35,7 @@
 		</div>
 
 		    
-	<!--PostJob Form  section -->
+	<!--SignUp Form  section -->
 	<section class="profile">
 		<div class="container">
 
@@ -67,7 +67,7 @@
 				<p class="return"><a href="index.php" class="returnIndex">Home</a></p>
 			</form>
 			</div>
-	</section><!-- End of PostJob Form  section -->
+	</section><!-- End of SignUp Form  section -->
 
 		<!--Footer-->	
 		<?php 
