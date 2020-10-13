@@ -38,7 +38,8 @@
             <h1>Assignment Home Page</h1>
 			<br>
 	
-				<p>Name: Chan Siaw Zheng <span> Student ID: 101217869 </p>
+				<p>Name: Chan Siaw Zheng 
+				<span> Student ID: 101217869 </p>
 				<p>Email: <a href="101217869@swin.edu.au">101217869@swin.edu.au</a></p>
 
     			<p>I declare that this assignment is my individual work. 
