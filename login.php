@@ -39,13 +39,15 @@ $errMsg="";
 				echo "Login Success";
 				header("Location: /MyFriendSystem/friendlist.php");
 				session_start();
-				$_SESSION["status"] = "true";
+				$_SESSION["status"] = true;
+				$_SESSION["email"] = $email;
 
 			}
 			else{
 				echo "<p>Error: Email or Password incorrect, Please Check. </a></p>";
 			}
 		}
+		$conn->close();
 
 		}
   }  

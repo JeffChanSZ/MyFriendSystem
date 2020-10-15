@@ -234,3 +234,6 @@ description: [CSS styles of PHP Assignment, Design of the website]
   }
   
   
+  table, th, td {
+    border: 1px solid black;
+  }

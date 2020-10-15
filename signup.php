@@ -82,7 +82,8 @@ $errMsg="";
 				 * Status True = Login
 				 * Status False = Logout
 				*/
-				$_SESSION["status"] = "true";	
+				$_SESSION["status"] = true;	
+				$_SESSION["email"] = $email;
 	}
 	 else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
