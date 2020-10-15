@@ -121,7 +121,7 @@ if (isset($_GET["Id"])) {
 							$displayName=$row_inner["profile_name"];
 						}
 					  }
-                // echo "<tr><td> <h3>" . $displayName . "</h3></td><td><button onclick='removeFriend($row[friend_id2])'> Remove Friend </button></td></tr>"; 
+              
 				echo "<tr><td> <h3>" . $row['friend_id2'] . "</h3></td><td><h2>" . $displayName ."</h2></td><td><button onclick='removeFriend($row[friend_id2])'> Remove Friend </button></td></tr>"; 
 
 			}

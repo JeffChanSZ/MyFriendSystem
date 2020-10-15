@@ -114,7 +114,12 @@ if (isset($_GET["Id"])) {
 
         <?php
             //Get All User and dispaly into a table
-            
+            $sql= "SELECT * FROM myfriends WHERE friend_id1 = '$myID'";
+            $result = mysqli_query($conn,$sql);
+            $myFriends=array();
+            while($row = mysqli_fetch_array($result)){   
+              array_push($myFriends, $row['friend_id2']);
+            }
             $sql= "SELECT * FROM friends WHERE friend_email != '$email'";
             $result = mysqli_query($conn,$sql);
             echo "<table style='width:100% '>"; // start a table tag in the HTML
@@ -125,7 +130,10 @@ if (isset($_GET["Id"])) {
               <td><h4>Action</h4></td>
             </tr>\n";
                 while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
-                echo "<tr><td> <h3>" . $row['friend_id'] . "</h3></td><td><h2>" . $row['profile_name'] ."</h2></td><td><button onclick='addFriend($row[friend_id])'> Add as Friend </button></td></tr>"; 
+                  if( !in_array( $row['friend_id'],$myFriends ))
+                      {
+                        echo "<tr><td> <h3>" . $row['friend_id'] . "</h3></td><td><h2>" . $row['profile_name'] ."</h2></td><td><button onclick='addFriend($row[friend_id])'> Add as Friend </button></td></tr>"; 
+                      }
                 }
 
             echo "</table>"; //Close the table in HTML
