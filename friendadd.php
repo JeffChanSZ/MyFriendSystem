@@ -46,6 +46,7 @@ if (isset($_GET["Id"])) {
           // VALUES ('$ID_toAdd','$myID')";
           	if ($conn->query($sql) === TRUE ) {
               echo "Friend Succesfully Added!";
+              //Update Number of Count
               $sql = "UPDATE friends SET num_of_friends=num_of_friends+1 WHERE friend_id='$myID' OR friend_id='$ID_toAdd'";
               $result = mysqli_query($conn,$sql);
              }
@@ -120,6 +121,7 @@ if (isset($_GET["Id"])) {
             while($row = mysqli_fetch_array($result)){   
               array_push($myFriends, $row['friend_id2']);
             }
+            //Not inlcude user own email
             $sql= "SELECT * FROM friends WHERE friend_email != '$email'";
             $result = mysqli_query($conn,$sql);
             echo "<table style='width:100% '>"; // start a table tag in the HTML
@@ -130,6 +132,7 @@ if (isset($_GET["Id"])) {
               <td><h4>Action</h4></td>
             </tr>\n";
                 while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
+                  //Make sure exist friend is not display into table again
                   if( !in_array( $row['friend_id'],$myFriends ))
                       {
                         echo "<tr><td> <h3>" . $row['friend_id'] . "</h3></td><td><h2>" . $row['profile_name'] ."</h2></td><td><button onclick='addFriend($row[friend_id])'> Add as Friend </button></td></tr>"; 

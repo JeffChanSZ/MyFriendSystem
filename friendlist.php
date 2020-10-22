@@ -2,7 +2,7 @@
 
 session_start();
 require 'settings.php';
-
+//Get logged in user information
 if($_SESSION['status']==true && $_SESSION['email']!=""){
     $email=$_SESSION['email'];
     $conn = mysqli_connect($host, $user, $pwd, $sql_db);
@@ -11,7 +11,7 @@ if($_SESSION['status']==true && $_SESSION['email']!=""){
     $sql = "SELECT * FROM friends WHERE friend_email = '$email'";
     $result = mysqli_query($conn,$sql);
     if ($result->num_rows > 0) {
-        // output data of each row
+        //Output data of each row
         while($row = $result->fetch_assoc()) {
             $name=$row["profile_name"];
 			$friendCount=$row['num_of_friends'];
@@ -36,6 +36,7 @@ if (isset($_GET["Id"])) {
 	
 		if ($conn->query($sql) === TRUE ) {
 		echo "Friend Succesfully Removed!";
+		//Friend count minus 1
 		$sql = "UPDATE friends SET num_of_friends=num_of_friends-1 WHERE friend_id=$myID  OR friend_id='$ID_toDelete'";
 		$result = mysqli_query($conn,$sql);
 	   }
@@ -113,7 +114,8 @@ if (isset($_GET["Id"])) {
               <td><h4>Friend Name</h4></td>
               <td><h4>Action</h4></td>
             </tr>\n";
-				while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
+				while($row = mysqli_fetch_array($result)){   
+					//Creates a loop to loop through results
 					$sql= "SELECT * FROM friends WHERE friend_id= '$row[friend_id2]'";
 					$result_inner = mysqli_query($conn,$sql);
 						if ($result_inner->num_rows > 0) {

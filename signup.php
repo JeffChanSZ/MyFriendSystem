@@ -1,6 +1,5 @@
+<?php
 
-
-	<?php
 $email="";
 $name="";
 $password="";
@@ -62,7 +61,7 @@ $errMsg="";
 			$result = mysqli_query($conn, $sql);
 
 	}
-	//CHECK IF EMAIL EXIST IN database
+	//Check if email exists in database, email must be unique
 	if($email!=""){
 		$result = mysqli_query($conn,"SELECT * FROM friends where friend_email='".$email."'");
 		if($result){
@@ -99,6 +98,7 @@ $errMsg="";
   }  
 
 ?>
+
 <!DOCTYPE html>
 <!-- get header ('Page Name'. 'Title')-->
 <html lang="en">
