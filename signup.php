@@ -138,7 +138,7 @@ $errMsg="";
           $errMsg .= "<p>Invalid Password: Password must contain only letters and numbers. </p>
           <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
 
-        }else if( $password != $confirm_password)){
+        }else if( $password != $confirm_password){
 			$errMsg .= "<p>Invalid Password: Password must match Confirm Password. </p>
 			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
   
@@ -152,11 +152,12 @@ $errMsg="";
           $errMsg .= "<p>Invalid Confirm Password: Confirm Password must contain only letters and numbers. </p>
           <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
 
-        }else if( $confirm_password != $password)){
+        }else if( $confirm_password != $password){
 			$errMsg .= "<p>Invalid Confirm Password: Confirm Password must match Password. </p>
 			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
   
 		}
+	}
 
 ?>
 
