@@ -110,54 +110,42 @@ $errMsg="";
   
   //Data validaton here -- Format Checking
   function validateFormat($email, $name, $password, $confirm_password, $errMsg){
-	if ($email=="") {
-	$errMsg .= "<p>Error Email: Empty Email Fill. </p>
-	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
-
-	}else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 	  $errMsg .= "<p>Invalid Email: Email must follow the Email format. </p>
 	  <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+		}
 
-	}
-
-	if ($name=="") {
-        $errMsg .= "<p>Error Name: Empty Name Fill. </p>
-        <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
-
-        }else if( !preg_match("/^[a-zA-Z ]*$/",$name)){
+		
+	if ( !preg_match("/^[a-zA-Z ]*$/",$name)){
           $errMsg .= "<p>Invalid Name: Email must contain only letters. </p>
           <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
 
 		}
 	
-	if ($password=="") {
-        $errMsg .= "<p>Error Password: Empty Password Fill. </p>
-        <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
 
-        }else if( !preg_match("/^[a-zA-Z0-9 ]*$/",$password)){
-          $errMsg .= "<p>Invalid Password: Password must contain only letters and numbers. </p>
-          <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
-
-        }else if( $password != $confirm_password){
+		if(!preg_match("/^[a-zA-Z0-9 ]*$/",$password))
+		{
+			$errMsg .= "<p>Invalid Password: Password must contain only letters and numbers. </p>
+			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+  
+		  }
+		if($password != $confirm_password){
 			$errMsg .= "<p>Invalid Password: Password must match Confirm Password. </p>
 			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
   
 		}
 
-	if ($confirm_password=="") {
-        $errMsg .= "<p>Error Confirm Password: Empty Confirm Password Fill. </p>
-        <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
-
-        }else if( !preg_match("/^[a-zA-Z0-9 ]*$/",$confirm_password)){
+		if( !preg_match("/^[a-zA-Z0-9 ]*$/",$confirm_password))
+			{
           $errMsg .= "<p>Invalid Confirm Password: Confirm Password must contain only letters and numbers. </p>
-          <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
-
-        }else if( $confirm_password != $password){
-			$errMsg .= "<p>Invalid Confirm Password: Confirm Password must match Password. </p>
-			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
-  
+		  <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
 		}
+
+	if($errMsg!=""){
+		echo $errMsg;
+		exit;
 	}
+  }
 
 ?>
 
@@ -210,18 +198,18 @@ $errMsg="";
 			<br>
 
 						<p><label for="email">Email </label> 
-							<input type="text" id="email" name= "email" placeholder="101217869@student.swin.edu.au" required="required" 
+							<input type="text" id="email" name= "email" placeholder="101217869@student.swin.edu.au"  
 							value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ''; ?>"/>
 						</p>
 						<p><label for="name">Profile Name </label> 
-							<input type="text" id="name" name= "name" placeholder="Chan" required="required"
+							<input type="text" id="name" name= "name" placeholder="Chan" 
 							value="<?php echo isset($_POST["name"]) ? $_POST["name"] : ''; ?>"/>
 						</p>
 						<p><label for="pswd">Password </label> 
-							<input type="password" id="pswd" name= "pswd" placeholder="******" required="required"/>
+							<input type="password" id="pswd" name= "pswd" placeholder="******" />
                         </p>
                         <p><label for="conpswd">Confirm Password </label> 
-							<input type="password" id="conpswd" name= "conpswd" placeholder="******" required="required"	 />
+							<input type="password" id="conpswd" name= "conpswd" placeholder="******"  />
 						</p>
 				
 				<p>

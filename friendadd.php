@@ -3,6 +3,16 @@
 session_start();
 require 'settings.php';
 
+//Pagination of Friend Add
+
+if (isset($_GET['pageno'])) {
+  $pageno = $_GET['pageno'];
+} else {
+  $pageno = 1;
+}
+$no_of_records_per_page = 5;
+$offset = ($pageno-1) * $no_of_records_per_page;
+
 if($_SESSION['status']==true && $_SESSION['email']!=""){
     $email=$_SESSION['email'];
     $conn = mysqli_connect($host, $user, $pwd, $sql_db);
@@ -21,9 +31,19 @@ if($_SESSION['status']==true && $_SESSION['email']!=""){
         echo "User Not Found";
       }
 
-      
-
 }
+
+$total_pages_sql = "SELECT COUNT(*) FROM myfriends";
+        $result = mysqli_query($conn,$total_pages_sql);
+        $total_rows = mysqli_fetch_array($result)[0];
+        $total_pages = ceil($total_rows / $no_of_records_per_page);
+
+        $sql = "SELECT * FROM myfriends LIMIT $offset, $no_of_records_per_page";
+        $res_data = mysqli_query($conn,$sql);
+        while($row = mysqli_fetch_array($res_data)){
+            //here goes the data
+        }
+
 
 if (isset($_GET["Id"])) {
           $ID_toAdd = $_GET["Id"] ;
@@ -79,6 +99,7 @@ if (isset($_GET["Id"])) {
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
 		<link rel="stylesheet" href="style/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	</head>
 	
@@ -159,6 +180,14 @@ if (isset($_GET["Id"])) {
 
 
         ?>
+    <ul class="pagination_container">
+      <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+            <a class="paginationStep" href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Previous</a>
+        <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+            <a class="paginationStep-active" href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+        </li>
+    </ul>
+
     <p class="exitnav"><a href="friendlist.php">Friend Lists </a>
     <a href="logout.php">Log out </a></p>
 

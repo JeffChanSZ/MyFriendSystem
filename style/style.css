@@ -307,4 +307,20 @@ description: [CSS styles of PHP Assignment, Design of the website]
   color: #fff;
   cursor: pointer;
 }
-  
+
+/* Pagination */
+.pagination_container {
+  padding-top: 100px;
+  width: 255px;
+  margin: 0 auto;
+}
+
+.paginationStep {
+  padding: 9px 40px 11px;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  border: 2px solid;
+  font-weight: 600;
+}
+
