@@ -46,6 +46,20 @@ description: [CSS styles of PHP Assignment, Design of the website]
   
     font-weight: bold;
   }
+
+  .parallax {
+    /* The bg used */
+    background-color:white;
+
+    /* Set a specific height */
+    min-height: 50px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
   
   /*header & menu*/
   
@@ -57,7 +71,10 @@ description: [CSS styles of PHP Assignment, Design of the website]
   .nav-bar {
   overflow: hidden;
   background-color: rgb(0, 0, 0);
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   }
   
   .nav-bar img {
@@ -75,6 +92,10 @@ description: [CSS styles of PHP Assignment, Design of the website]
   text-decoration: none;
   font-size: 17px;
   padding-left: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   }
   
   .nav-bar .icon {
@@ -118,6 +139,10 @@ description: [CSS styles of PHP Assignment, Design of the website]
   color: #d1ffcc;
   padding: 20px;
   box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   }
   
@@ -153,7 +178,7 @@ description: [CSS styles of PHP Assignment, Design of the website]
   }
    
   
-  input[type="text"] {
+  input[type="text"], [type="password"] {
     background: rgba(255,255,255,0.1);
     border: none;
     font-size: 16px;
@@ -184,27 +209,6 @@ description: [CSS styles of PHP Assignment, Design of the website]
     margin-bottom: 10px;
   }
   
-  .return {
-    font-size: 16px;
-    height: auto;
-    margin: 0;
-    outline: 0;
-    padding: 15px;
-    width: 100%;
-    color: #000000;
-  }
-  
-  .returnIndex {
-  font-size: 16px;
-  height: auto;
-  margin: 0;
-  outline: 0;
-  padding: 15px;
-  width: 100%;
-  color: blue;
-  font-weight: bold;
-  text-decoration: underline;
-  }
   
   /*About Page*/
   
@@ -224,6 +228,11 @@ description: [CSS styles of PHP Assignment, Design of the website]
   font-weight: bold;
   text-decoration: underline;
   }
+
+  .about img{
+    width: 100%;
+
+    }
   
   img .hoverimage{
   display: inline-block;
@@ -233,7 +242,69 @@ description: [CSS styles of PHP Assignment, Design of the website]
   margin: 1%;
   }
   
+ 
+  /*Friend Add & Friend List Page*/  
+
+  .profile h2{
+    text-align:left;
+    color: #009879;
+    font-weight: bold;
   
-  table, th, td {
-    border: 1px solid black;
   }
+
+  .section-3 table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      min-width: 400px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+    
+    
+  }
+
+  .section-3 thead tr{
+    background-color: #009879;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+  }
+  .section-3 th, .section-3 td{
+    padding: 12px 15px;
+  }
+  .section-3 tbody tr{
+    border-bottom: 1px solid #dddddd;
+  }
+  .section-3 tr tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+  }
+  .section-3 tr tbody tr:last-of-type{
+    border-bottom: 2px solid #009879;
+  }
+
+  .exitnav {
+      display: inline-block;  
+      height: 40px;
+      line-height: 40px;
+      padding: 0 14px;
+      box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+      background: #ffffff;
+      border: none;
+      border-radius: 3px;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .025em;
+      color: #09cbff;
+      text-decoration: none;
+      transition: all .15s ease;
+    
+  }
+
+  .exitnav:hover {
+  background-color: #09cbff;
+  color: #fff;
+  cursor: pointer;
+}
+  

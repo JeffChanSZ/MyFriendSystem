@@ -7,7 +7,7 @@
 		<meta name="author" content="ChanSiawZheng" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>My Friend System</title>
-		<link rel="icon" href="images/logo.jpeg" type="image/x-icon" />
+		<link rel="icon" href="images/logo.png" type="image/x-icon" />
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
@@ -30,7 +30,8 @@
 			<a href="index.php">Home </a>
 		</div>
 	</div>
-
+	
+	<div class="parallax"></div>
 	<section class="banner-image">
 		<div class="container">
 		<div class="banner-content">
@@ -38,7 +39,7 @@
             <h1>Assignment Home Page</h1>
 			<br>
 	
-				<p>Name: Chan Siaw Zheng 
+				<p>Name: Chan Siaw Zheng &nbsp; &nbsp; 
 				<span> Student ID: 101217869 </p>
 				<p>Email: <a href="101217869@swin.edu.au">101217869@swin.edu.au</a></p>
 
@@ -49,7 +50,7 @@
 		</div>
 		</div>
 	</section>
-
+	<div class="parallax"></div>
 
 	<!--Footer-->	
 		<?php 

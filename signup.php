@@ -6,35 +6,46 @@ $password="";
 $confirm_password="";
 $errMsg="";
 
-//Data validaton here
+//Data validaton here -- Empty Fills
   if (!empty($_POST)){
 	if (isset($_POST['email']) && $_POST['email'] !="" ){
 		$email = $_POST['email'];
 	}
 	else {
-		$errMsg.="<p>Error: Please enter your email. </a></p>";
+		$errMsg .= "<p>Error Email: Empty Email Fill. Please enter your email. </p>
+      	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+    
 	}
 	if (isset($_POST['name']) && $_POST['name'] !="" ){
 		$name = $_POST['name'];
 	}
 	else {
-		$errMsg.= "<p>Error: Please enter your name. </a></p>";
+		$errMsg .= "<p>Error Name: Empty Name Fill. Please enter your name. </p>
+      	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+    
 	}
 	if (isset($_POST['pswd']) && $_POST['pswd'] !="" ){
 		$password = $_POST['pswd'];
 	}
 	else {
-		$errMsg.= "<p>Error: Please enter your password. </a></p>";
+		$errMsg .= "<p>Error Password: Empty Password Fill. Please enter your password. </p>
+      	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+    
 	}
 	if (isset($_POST['conpswd']) && $_POST['conpswd'] !="" ){
 		$confirm_password = $_POST['conpswd'];
 	}
 	else {
-		$errMsg.= "<p>Error: Please enter your confirm password. </a></p>";
+		$errMsg .= "<p>Error Confirm Password: Empty Confirm Password Fill. Please enter your confirm password. </p>
+      	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
 	}
+
+	validateFormat($email, $name, $password, $confirm_password, $errMsg);
 
 	if($errMsg!=""){
 		echo $errMsg;
+		exit;
 	}
   	else{
     
@@ -54,8 +65,8 @@ $errMsg="";
 			friend_id INT(11)  AUTO_INCREMENT PRIMARY KEY,
 			friend_email VARCHAR(50) NOT NULL,
 			profile_password VARCHAR(20) NOT NULL,
-			profile_name VARCHAR(30),
-			date_started DATE,
+			profile_name VARCHAR(30) NOT NULL,
+			date_started DATE NOT NULL,
 			num_of_friends INT(10) UNSIGNED,
 			)";
 			$result = mysqli_query($conn, $sql);
@@ -80,7 +91,7 @@ $errMsg="";
 				/**
 				 * Status True = Login
 				 * Status False = Logout
-				*/
+				**/
 				$_SESSION["status"] = true;	
 				$_SESSION["email"] = $email;
 	}
@@ -95,7 +106,57 @@ $errMsg="";
   
 	}
 	
-  }  
+  }
+  
+  //Data validaton here -- Format Checking
+  function validateFormat($email, $name, $password, $confirm_password, $errMsg){
+	if ($email=="") {
+	$errMsg .= "<p>Error Email: Empty Email Fill. </p>
+	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+	}else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+	  $errMsg .= "<p>Invalid Email: Email must follow the Email format. </p>
+	  <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+	}
+
+	if ($name=="") {
+        $errMsg .= "<p>Error Name: Empty Name Fill. </p>
+        <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+        }else if( !preg_match("/^[a-zA-Z ]*$/",$name)){
+          $errMsg .= "<p>Invalid Name: Email must contain only letters. </p>
+          <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+		}
+	
+	if ($password=="") {
+        $errMsg .= "<p>Error Password: Empty Password Fill. </p>
+        <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+        }else if( !preg_match("/^[a-zA-Z0-9 ]*$/",$password)){
+          $errMsg .= "<p>Invalid Password: Password must contain only letters and numbers. </p>
+          <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+        }else if( $password != $confirm_password)){
+			$errMsg .= "<p>Invalid Password: Password must match Confirm Password. </p>
+			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+  
+		}
+
+	if ($confirm_password=="") {
+        $errMsg .= "<p>Error Confirm Password: Empty Confirm Password Fill. </p>
+        <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+        }else if( !preg_match("/^[a-zA-Z0-9 ]*$/",$confirm_password)){
+          $errMsg .= "<p>Invalid Confirm Password: Confirm Password must contain only letters and numbers. </p>
+          <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+        }else if( $confirm_password != $password)){
+			$errMsg .= "<p>Invalid Confirm Password: Confirm Password must match Password. </p>
+			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+  
+		}
 
 ?>
 
@@ -108,7 +169,7 @@ $errMsg="";
 		<meta name="author" content="ChanSiawZheng" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>My Friend System -- Sign Up Form</title>
-		<link rel="icon" href="images/logo.jpeg" type="image/x-icon" />
+		<link rel="icon" href="images/logo.png" type="image/x-icon" />
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
@@ -135,7 +196,7 @@ $errMsg="";
 			</div>
 		</div>
 
-		    
+		<div class="parallax"></div>   
 	<!--SignUp Form  section -->
 	<section class="profile">
 		<div class="container">
@@ -156,10 +217,10 @@ $errMsg="";
 							value="<?php echo isset($_POST["name"]) ? $_POST["name"] : ''; ?>"/>
 						</p>
 						<p><label for="pswd">Password </label> 
-							<input type="password" id="pswd" name= "pswd" required="required"/>
+							<input type="password" id="pswd" name= "pswd" placeholder="******" required="required"/>
                         </p>
                         <p><label for="conpswd">Confirm Password </label> 
-							<input type="password" id="conpswd" name= "conpswd" required="required"	 />
+							<input type="password" id="conpswd" name= "conpswd" placeholder="******" required="required"	 />
 						</p>
 				
 				<p>
@@ -167,11 +228,12 @@ $errMsg="";
 					<button type="submit" name="submit" value="Submit" class="Clear" >Clear </button>
 				</p>
 				
-				<p class="return"><a href="index.php" class="returnIndex">Home</a></p>
+				<p class="exitnav"><a href="index.php">Home</a></p>
 			</form>
 			</div>
 	</section><!-- End of SignUp Form  section -->
 
+	<div class="parallax"></div>
 		<!--Footer-->	
 		<?php 
 			include 'footer.inc';

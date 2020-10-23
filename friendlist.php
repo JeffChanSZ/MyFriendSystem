@@ -16,9 +16,7 @@ if($_SESSION['status']==true && $_SESSION['email']!=""){
             $name=$row["profile_name"];
 			$friendCount=$row['num_of_friends'];
 			$myID=$row['friend_id'];
-
-        //   echo "id: " . $row["friend_id"]. " - Name: " . $row["profile_name"]. "<br>";
-        }
+		}
       } else {
         echo "User Not Found";
       }
@@ -63,12 +61,13 @@ if (isset($_GET["Id"])) {
 		<meta name="description" content="Assignment 2 " />
 		<meta name="author" content="ChanSiawZheng" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>My Friend System -- Login Form</title>
-		<link rel="icon" href="images/logo.jpeg" type="image/x-icon" />
+		<title>My Friend System -- FriendList</title>
+		<link rel="icon" href="images/logo.png" type="image/x-icon" />
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
 		<link rel="stylesheet" href="style/style.css" />
 	</head>
 	
@@ -87,21 +86,27 @@ if (isset($_GET["Id"])) {
 		<div class="directory">
 			<div class="container">
 				<a href="index.php">Home </a> >
-				<a href="signup.php">Login </a>
+				<a href="login.php">Login </a> >
+				<a href="friendlist.php">Friend List </a> 
 			</div>
 		</div>
 
-		    
-	<!--Login Form  section -->
+		<div class="parallax"></div>
+	<!--Friend List section -->
 	<section class="profile">
 		<div class="container">
 
-        <h1>My Friend System</h1>
-        <h2><?php echo $name; ?> Friend List Page</h2>
-        <h3>Total Number of Friend: <?php echo $friendCount; ?> </h3>
-		</br></br></br></br></br>
-        <h3>Friend List</h3>
+        <h1>My Friend System </br>
+		<?php echo $name; ?>’s Friend List Page </br>
+        Total Number of Friends is <?php echo $friendCount; ?>
+		</h1>
+		</br></br>
 
+		<h2>Friend List</h2>
+
+		<div class="section-3">
+			<table class="table">
+				
         <?php
             //Get All User and dispaly into a table
             
@@ -109,11 +114,13 @@ if (isset($_GET["Id"])) {
             $result = mysqli_query($conn,$sql);
             echo "<table style='width:100% '>"; // start a table tag in the HTML
             echo
-			"<tr>
-			  <td><h4>ID</h4></td>
-              <td><h4>Friend Name</h4></td>
-              <td><h4>Action</h4></td>
-            </tr>\n";
+			"<thead>
+			<tr>
+			  <th><h4>ID</h4></th>
+              <th><h4>Friend Name</h4></th>
+              <th><h4>Action</h4></th>
+			</tr>
+			</thead>\n";
 				while($row = mysqli_fetch_array($result)){   
 					//Creates a loop to loop through results
 					$sql= "SELECT * FROM friends WHERE friend_id= '$row[friend_id2]'";
@@ -124,7 +131,14 @@ if (isset($_GET["Id"])) {
 						}
 					  }
               
-				echo "<tr><td> <h3>" . $row['friend_id2'] . "</h3></td><td><h2>" . $displayName ."</h2></td><td><button onclick='removeFriend($row[friend_id2])'> Remove Friend </button></td></tr>"; 
+				echo "
+				<tbody>
+				<tr>
+				<td><h3>" . $row['friend_id2'] . "</h3></td>
+				<td><h3>" . $displayName . "</h3></td>
+				<td><button onclick='removeFriend($row[friend_id2])'> Unfriend </button></td>
+				</tr>
+				</tbody>"; 
 
 			}
 
@@ -134,32 +148,37 @@ if (isset($_GET["Id"])) {
 
 
 
-        ?>
-		<a href="friendadd.php">Add Friend</a>
-		<a href="logout.php">Logout</a>
+		?>
+		<p class="exitnav"><a href="friendadd.php">Add Friends </a>
+		<a href="logout.php">Log out </a></p>
+
+		</table>
+		</div>
+		</div>
 
 		</div>
 
 
-	</section><!-- End of Login Form  section -->
+	</section><!-- End of Friend List section -->
+	<div class="parallax"></div>
 
 		<!--Footer-->	
 		<?php 
 			include 'footer.inc';
 		?>
  		<!-- End footer section -->
-    
+	
+		 <!-- JavaScript Section -->
 		 <script>
          function removeFriend(ID) {        
             console.log(ID);
-            // $.post("friendadd.php", {data:ID}, function(results){
-            // alert(results);
-            // });
             window.location.href = "friendlist.php?Id=" + ID;
             
 
         }
-        </script>
+		</script>
+		<!-- End of JavaScript Section -->
+
 	</body> 
 	</html>
 

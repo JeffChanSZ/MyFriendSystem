@@ -38,6 +38,10 @@ $errMsg="";
 				echo "Login Success";
 				header("Location: /MyFriendSystem/friendlist.php");
 				session_start();
+				/**
+				 * Status True = Login
+				 * Status False = Logout
+				**/
 				$_SESSION["status"] = true;
 				$_SESSION["email"] = $email;
 
@@ -61,7 +65,7 @@ $errMsg="";
 		<meta name="author" content="ChanSiawZheng" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>My Friend System -- Login Form</title>
-		<link rel="icon" href="images/logo.jpeg" type="image/x-icon" />
+		<link rel="icon" href="images/logo.png" type="image/x-icon" />
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
@@ -84,11 +88,11 @@ $errMsg="";
 		<div class="directory">
 			<div class="container">
 				<a href="index.php">Home </a> >
-				<a href="signup.php">Login </a>
+				<a href="login.php">Login </a>
 			</div>
 		</div>
 
-		    
+		<div class="parallax"></div>  
 	<!--Login Form  section -->
 	<section class="profile">
 		<div class="container">
@@ -105,7 +109,7 @@ $errMsg="";
 							value="<?php echo isset($_POST["email"]) ? $_POST["email"] : ''; ?>" />
 						</p>
 						<p><label for="pswd">Password </label> 
-							<input type="password" id="pswd" name= "pswd" />
+							<input type="password" id="pswd" placeholder="******" name= "pswd" />
                         </p>
 				
 				<p>
@@ -113,9 +117,11 @@ $errMsg="";
 					<button type="submit" name="submit" value="Submit" class="Clear" >Clear </button>
 				</p>
 				
+				<p class="exitnav"><a href="index.php">Home</a></p>
 			</form>
 			</div>
 	</section><!-- End of Login Form  section -->
+	<div class="parallax"></div>
 
 		<!--Footer-->	
 		<?php 

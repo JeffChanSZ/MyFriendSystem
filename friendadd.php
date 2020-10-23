@@ -42,8 +42,6 @@ if (isset($_GET["Id"])) {
         if($ID_toAdd!=$myID){
           $sql = "INSERT INTO myfriends (friend_id1,friend_id2) 
             VALUES ('$myID','$ID_toAdd'), ('$ID_toAdd','$myID')";
-          // $sql.= "INSERT INTO myfriends (friend_id1,friend_id2) 
-          // VALUES ('$ID_toAdd','$myID')";
           	if ($conn->query($sql) === TRUE ) {
               echo "Friend Succesfully Added!";
               //Update Number of Count
@@ -72,14 +70,15 @@ if (isset($_GET["Id"])) {
 		<meta name="description" content="Assignment 2 " />
 		<meta name="author" content="ChanSiawZheng" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>My Friend System -- Login Form</title>
-		<link rel="icon" href="images/logo.jpeg" type="image/x-icon" />
+		<title>My Friend System -- Friend Add </title>
+		<link rel="icon" href="images/logo.png" type="image/x-icon" />
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" />
 		<link rel="stylesheet" href="style/style.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 	</head>
 	
@@ -98,20 +97,26 @@ if (isset($_GET["Id"])) {
 		<div class="directory">
 			<div class="container">
 				<a href="index.php">Home </a> >
-				<a href="signup.php">Login </a>
+        <a href="login.php">Login </a> >
+        <a href="friendadd.php">Friend Add </a> 
 			</div>
 		</div>
 
-		    
+    <div class="parallax"></div>
 	<!--Login Form  section -->
 	<section class="profile">
 		<div class="container">
 
-        <h1>My Friend System</h1>
-        <h2><?php echo $name; ?> Add Friend  Page</h2>
-        <h3>Total Number of Friend: <?php echo $friendCount; ?> </h3>
-        </br></br></br></br></br>
-        <h3>Friend List</h3>
+        <h1>My Friend System </br>
+        <?php echo $name; ?>’s Add Friend Page </br>
+        Total Number of Friends is <?php echo $friendCount; ?> 
+        </h1>
+      </br></br>
+
+        <h2>Friend List</h2>
+
+        <div class="section-3">
+			<table class="table">
 
         <?php
             //Get All User and dispaly into a table
@@ -126,16 +131,25 @@ if (isset($_GET["Id"])) {
             $result = mysqli_query($conn,$sql);
             echo "<table style='width:100% '>"; // start a table tag in the HTML
             echo
-            "<tr>
-              <td><h4>ID</h4></td>
-              <td><h4>Name</h4></td>
-              <td><h4>Action</h4></td>
-            </tr>\n";
+            "<thead>
+			      <tr>
+			        <th><h4>ID</h4></th>
+              <th><h4>Name</h4></th>
+              <th><h4>Action</h4></th>
+		      	</tr>
+		      	</thead>\n";
                 while($row = mysqli_fetch_array($result)){   //Creates a loop to loop through results
                   //Make sure exist friend is not display into table again
                   if( !in_array( $row['friend_id'],$myFriends ))
                       {
-                        echo "<tr><td> <h3>" . $row['friend_id'] . "</h3></td><td><h2>" . $row['profile_name'] ."</h2></td><td><button onclick='addFriend($row[friend_id])'> Add as Friend </button></td></tr>"; 
+                        echo "
+                        <tbody>
+                        <tr>
+                        <td><h3>" . $row['friend_id'] . "</h3></td>
+                        <td><h3>" . $row['profile_name'] ."</h3></td>
+                        <td><button onclick='addFriend($row[friend_id])'> Add as Friend </button></td>
+                        </tr>
+                        </tbody>"; 
                       }
                 }
 
@@ -145,10 +159,16 @@ if (isset($_GET["Id"])) {
 
 
         ?>
-    <a href="friendlist.php"> View My Friend</a>
-		<a href="logout.php">Logout</a>
+    <p class="exitnav"><a href="friendlist.php">Friend Lists </a>
+    <a href="logout.php">Log out </a></p>
+
+    </table>
+		</div>
+    </div>
+    
 		</div>
 	</section><!-- End of Login Form  section -->
+  <div class="parallax"></div>
 
 		<!--Footer-->	
 		<?php 
@@ -160,9 +180,6 @@ if (isset($_GET["Id"])) {
          <script>
          function addFriend(ID) {        
             console.log(ID);
-            // $.post("friendadd.php", {data:ID}, function(results){
-            // alert(results);
-            // });
             window.location.href = "friendadd.php?Id=" + ID;
             
 
