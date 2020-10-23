@@ -3,23 +3,31 @@ $email="";
 $password="";
 $errMsg="";
 
-//Data validaton here
-  if (!empty($_POST)){
+//Data validaton here -- Empty Fills
+if (!empty($_POST)){
 	if (isset($_POST['email']) && $_POST['email'] !="" ){
 		$email = $_POST['email'];
 	}
 	else {
-		$errMsg.="<p>Error: Please enter your email. </a></p>";
+		$errMsg .= "<p>Error Email: Empty Email Fill. Please enter your email. </p>
+      	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+    
 	}
-	
 	if (isset($_POST['pswd']) && $_POST['pswd'] !="" ){
 		$password = $_POST['pswd'];
 	}
 	else {
-		$errMsg.="<p>Error: Please enter your password. </a></p>";
+		$errMsg .= "<p>Error Password: Empty Password Fill. Please enter your password. </p>
+      	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+    
 	}
+
+	validateFormat($email, $password, $errMsg);
+
 	if($errMsg!=""){
 		echo $errMsg;
+		exit;
+
 		}
 	else{
 
@@ -53,7 +61,34 @@ $errMsg="";
 		$conn->close();
 
 		}
-  }  
+  }
+  
+  //Data validaton here -- Format Checking
+  function validateFormat($email, $password, $errMsg){
+	if ($email=="") {
+	$errMsg .= "<p>Error Email: Empty Email Fill. </p>
+	<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+	}else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+	  $errMsg .= "<p>Invalid Email: Email must follow the Email format. </p>
+	  <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+	}
+	
+	if ($password=="") {
+        $errMsg .= "<p>Error Password: Empty Password Fill. </p>
+        <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+        }else if( !preg_match("/^[a-zA-Z0-9 ]*$/",$password)){
+          $errMsg .= "<p>Invalid Password: Password must contain only letters and numbers. </p>
+          <p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+
+        }else if( $password != $confirm_password){
+			$errMsg .= "<p>Invalid Password: Password must match Confirm Password. </p>
+			<p>Return back to <a href=\"index.php\"> Home Page</a> or <a href=\"signup.php\"> Sign Up Page</a></p></br>";
+  
+		}
+	}
 
 ?>
 <!DOCTYPE html>
